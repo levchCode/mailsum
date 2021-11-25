@@ -1,2 +1,2 @@
-# mailsum
+# MailSum
 Email summarizer
