@@ -19,7 +19,7 @@ class Mail:
         self.creds = self.auth()
         self.gmail_service = build('gmail', 'v1', credentials=self.creds)
 
-    def read_message(self, message_id):
+    def read_message(self, message_id) -> str:
         mail_texts = []
         msg = self.gmail_service.users().messages().get(userId='me', id=message_id, format='full').execute()
         # parts can be the message body, or attachments
@@ -39,7 +39,7 @@ class Mail:
                     else:
                         continue
                     mail_texts.append(text)
-        return mail_texts
+        return " ".join(mail_texts)
 
     @staticmethod
     def auth():
@@ -72,7 +72,7 @@ class Mail:
         messages = self.list_messages()
         if not message_id:
             for message in messages[0:NUMBER_MESSAGES]:
-                mail_texts += self.read_message(message['id'])
+                mail_texts.append(self.read_message(message['id']))
         else:
             mail_texts = self.read_message(message_id)
         return mail_texts

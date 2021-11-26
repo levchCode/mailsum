@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 
 from src.Mail import Mail
+from src.Ml import Ml
 
 
 app = Flask(__name__)
@@ -34,6 +35,19 @@ def email_text():
     mailer = Mail()
     mail_texts = mailer.list_text_messages(messages_id)
     return jsonify({"results": mail_texts})
+
+
+@app.route("/task_by_email", methods=["GET"])
+def task_by_email():
+    """
+    Return task from email by id
+    """
+    messages_id = request.args.get('id')
+    mailer = Mail()
+    mail_texts = mailer.list_text_messages(messages_id)
+    model = Ml
+    task = model.predict(text=mail_texts)
+    return jsonify(task)
 
 
 if __name__ == "__main__":
