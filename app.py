@@ -7,7 +7,6 @@ from src.Ml import Ml
 app = Flask(__name__)
 cors = CORS(app)
 
-
 @app.route("/")
 def index():
     """
