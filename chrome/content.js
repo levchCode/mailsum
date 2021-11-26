@@ -2,14 +2,7 @@ let messageId;
 let token;
 let summary;
 
-window.addEventListener("load", () => {
-
-    // Find token
-    chrome.storage.local.get(['key'], (result) => {
-        if (!result.key) {
-            authorize();
-        }
-    })
+window.addEventListener("load", async () => {
 
     // Add spinner during processing
     setSpinner();
@@ -21,27 +14,16 @@ window.addEventListener("load", () => {
     // Then fetch the tldr and insert it into the email element
     for (let i = 0; i < emails.length; i++) {
         let lastMessageId = emails[i].children[4].children[0].children[1].getAttribute('data-legacy-last-message-id');
-        let summary = fetchBrief(lastMessageId);
+        let summary = await fetchBrief(lastMessageId);
         emails[i].setAttribute('title', 'TLDR: ' + summary.tldr + ' \nTime: ' + summary.time)
     }
+    processing.setAttribute('hidden', '');
  });
 
-function authorize() {
-  // TODO: authorization with google
-}
 
-function fetchBrief(msgId) {
-
-    // fetch('http://localhost/tldr')
-    // .then(response => response.json())
-    // .then(data => {
-    //   processing.setAttribute('hidden', '');
-    //   return data
-    // });
-    //const resp = await fetch("http://localhost/tldr");
-    //const tldr = await resp.json();
-
-    return { tldr: "Sam must do this and Lev redo this", time: "8 hours"}
+async function fetchBrief(msgId) {
+    const resp = await fetch('http://localhost:5000/task_by_email?id='+ msgId);
+    return await resp.json();
 }
 
 function setSpinner() {
