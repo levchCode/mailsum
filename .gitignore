@@ -1,4 +1,6 @@
-# IDEs and editors
+*.idea
+*.xml
+*.iml
 .idea/
 #pechache
 *__pycache__*
