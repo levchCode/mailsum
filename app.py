@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 
@@ -9,12 +10,7 @@ cors = CORS(app)
 
 @app.route("/")
 def index():
-    """
-    Demonstrate text of the 5 last messages. Number of the last messages change in the src.Mail NUMBER_MESSAGES
-    """
-    mailer = Mail()
-    mail_texts = mailer.list_text_messages()
-    return render_template("index.html", texts=mail_texts)
+    return render_template("index.html")
 
 
 @app.route("/list_email_ids", methods=["GET"])
@@ -55,4 +51,4 @@ def task_by_email():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run('0.0.0.0', port=int(os.environ.get('PORT', 5000)))
