@@ -1,9 +1,13 @@
 import spacy
-
+from spacy.cli import download
 
 class GetDate:
     def __init__(self):
-        self.nlp = spacy.load("en_core_web_sm")
+        try:
+            self.nlp = spacy.load("en_core_web_sm")
+        except:
+            download('en')
+            self.nlp = spacy.load("en_core_web_sm")
 
     def __call__(self, text: str) -> list:
         text = text.replace('!', '.').replace('?', '.').replace(';', '.').split('.')
@@ -22,3 +26,7 @@ class GetDate:
             if bool(result):
                 results.append(result)
         return results
+
+
+getdata = GetDate()
+print(getdata('hi in 11 am'))
