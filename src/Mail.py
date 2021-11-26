@@ -16,9 +16,8 @@ NUMBER_MESSAGES = 5
 
 class Mail:
     def __init__(self):
-        # self.creds = self.auth()
-        # self.gmail_service = build('gmail', 'v1', credentials=self.creds)
-        self.gmail_service = self.get_authenticated_service()
+        self.creds = self.auth()
+        self.gmail_service = build('gmail', 'v1', credentials=self.creds)
 
     def read_message(self, message_id) -> str:
         mail_texts = []
@@ -63,12 +62,6 @@ class Mail:
                 token.write(creds.to_json())
 
         return creds
-
-    @staticmethod
-    def get_authenticated_service():
-        flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-        credentials = flow.run_console()
-        return build('gmail', 'v1', credentials=credentials)
 
     def list_messages(self):
         results = self.gmail_service.users().messages().list(userId='me').execute()
