@@ -22,7 +22,7 @@ window.addEventListener("load", async () => {
 
 
 async function fetchBrief(msgId) {
-    const resp = await fetch('http://localhost:5000/task_by_email?id='+ msgId);
+    const resp = await fetch('http://tldremail.herokuapp.com/task_by_email?id='+ msgId);
     return await resp.json();
 }
 
