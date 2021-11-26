@@ -9,12 +9,7 @@ cors = CORS(app)
 
 @app.route("/")
 def index():
-    """
-    Demonstrate text of the 5 last messages. Number of the last messages change in the src.Mail NUMBER_MESSAGES
-    """
-    mailer = Mail()
-    mail_texts = mailer.list_text_messages()
-    return render_template("index.html", texts=mail_texts)
+    return render_template("index.html")
 
 
 @app.route("/list_email_ids", methods=["GET"])
