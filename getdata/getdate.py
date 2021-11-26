@@ -27,6 +27,3 @@ class GetDate:
                 results.append(result)
         return results
 
-
-getdata = GetDate()
-print(getdata('hi in 11 am'))
