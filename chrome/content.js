@@ -14,15 +14,16 @@ window.addEventListener("load", async () => {
     // Then fetch the tldr and insert it into the email element
     for (let i = 0; i < emails.length; i++) {
         let lastMessageId = emails[i].children[4].children[0].children[1].getAttribute('data-legacy-last-message-id');
-        let summary = await fetchBrief(lastMessageId);
-        emails[i].setAttribute('title', 'TLDR: ' + summary.tldr + ' \nTime: ' + summary.time)
+        let data = await fetchBrief(lastMessageId);
+        emails[i].setAttribute('title', 'TLDR: ' + data[0].summary_text + ' \nTime: ' + " TBI")
     }
     processing.setAttribute('hidden', '');
  });
 
 
 async function fetchBrief(msgId) {
-    const resp = await fetch('http://tldremail.herokuapp.com/task_by_email?id='+ msgId);
+    //const resp = await fetch('https://tldremail.herokuapp.com/task_by_email?id='+ msgId);
+    const resp = await fetch('http://localhost:5000/task_by_email?id='+ msgId);
     return await resp.json();
 }
 

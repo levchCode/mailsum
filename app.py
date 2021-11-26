@@ -46,7 +46,7 @@ def task_by_email():
     mailer = Mail()
     mail_texts = mailer.list_text_messages(messages_id)
     model = Ml
-    task = model.predict(text=mail_texts)
+    task = model.predict_single(text=mail_texts)
     return jsonify(task)
 
 
