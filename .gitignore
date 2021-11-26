@@ -1,0 +1,4 @@
+# IDEs and editors
+.idea/
+#pechache
+*__pycache__*
