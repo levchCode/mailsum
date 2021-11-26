@@ -1,13 +1,23 @@
 {
-    "manifest_version": 3,
-    "name": "MailSum",
-    "description": "Email summarizer",
-    "version": "1.0",
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "js": ["content.js"],
-            "run_at": "document_end"
-        }
+  "manifest_version": 3,
+  "name": "MailSum",
+  "description": "Email summarizer",
+  "version": "1.0",
+  "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["content.js"],
+          "css": ["styles.css"],
+          "run_at": "document_end"
+      }
+    ],
+    "permissions": [
+      "storage"
+    ],
+    "oauth2": {
+    "client_id": "322446365449-r5titkv3cc4u5ahabu2mhddg76pf1k5u.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.modify"
     ]
+  }
 }
