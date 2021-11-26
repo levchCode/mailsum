@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS, cross_origin
 
 from src.Mail import Mail
 from src.Ml import Ml
 
-
 app = Flask(__name__)
+cors = CORS(app)
+
 
 @app.route("/")
 def index():
@@ -17,6 +19,7 @@ def index():
 
 
 @app.route("/list_email_ids", methods=["GET"])
+@cross_origin()
 def list_emails():
     """
     Return list of messages's ids and their threads ids
@@ -27,6 +30,7 @@ def list_emails():
 
 
 @app.route("/email_text", methods=["GET"])
+@cross_origin()
 def email_text():
     """
     Return text of message by id
@@ -38,6 +42,7 @@ def email_text():
 
 
 @app.route("/task_by_email", methods=["GET"])
+@cross_origin()
 def task_by_email():
     """
     Return task from email by id
