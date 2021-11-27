@@ -19,7 +19,7 @@ generator_kwargs = {
     "max_length": 50,
     "no_repeat_ngram_size": 5,
     "num_beams": 10,
-    "length_penalty": 1.2,
+    "length_penalty": 0.5,
     "early_stopping": True,
 }
 
